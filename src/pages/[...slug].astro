@@ -9,14 +9,14 @@ import Testimonials from '@components/Testimonials.astro';
 import { fetchData, getPageById } from '@data/page';
 
 export async function getStaticPaths() {
-    const data = await fetchData();
-    return data.map((page: Page) => {
-        const slug = page.slug.current === '/' ? undefined : page.slug.current;
-        return {
-            params: { slug },
-            props: { id: page._id }
-        };
-    });
+  const data = await fetchData();
+  return data.map((page: Page) => {
+    const slug = page.slug.current === '/' ? undefined : page.slug.current;
+    return {
+      params: { slug },
+      props: { id: page._id }
+    };
+  });
 }
 
 const { id } = Astro.props;
@@ -26,24 +26,59 @@ const page: Page = pages.length ? pages[0] : null;
 const { _id, title, sections, metaTitle, metaDescription, socialImage } = page || {};
 
 const componentMap = {
-    cardsSection: Cards,
-    ctaSection: Cta,
-    heroSection: Hero,
-    logosSection: Logos,
-    testimonialsSection: Testimonials
+  cardsSection: Cards,
+  ctaSection: Cta,
+  heroSection: Hero,
+  logosSection: Logos,
+  testimonialsSection: Testimonials
 };
 ---
 
-{
-    page && (
-        <Layout title={metaTitle ?? title} description={metaDescription} image={socialImage}>
-            <div data-sb-object-id={_id}>
-                {sections?.length &&
-                    sections.map((section, idx) => {
-                        const Component = componentMap[section._type];
-                        return <Component {...section} data-sb-field-path={`sections.${idx}`} />;
-                    })}
-            </div>
-        </Layout>
-    )
-}
+<style>
+  body {
+    background-color: #FFF1F8; /* nền hồng pastel */
+    color: #4A3F55; /* chữ tím đậm pastel */
+    font-family: 'Nunito', sans-serif;
+  }
+
+  a {
+    color: #F06292;
+  }
+
+  section {
+    padding: 2rem 1rem;
+    background-color: #FFEBF0; /* pastel hồng nhạt */
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  h1, h2, h3 {
+    color: #BA68C8; /* tím pastel */
+  }
+
+  button {
+    background-color: #F8BBD0;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #F06292;
+  }
+
+</style>
+
+{page && (
+  <Layout title={metaTitle ?? title} description={metaDescription} image={socialImage}>
+    <div data-id={_id}>
+      {sections.length &&
+        sections.map((section, idx) => {
+          const Component = componentMap[section._type];
+          return Component ? <Component {...section} /> : null;
+        })}
+    </div>
+  </Layout>
+)}
