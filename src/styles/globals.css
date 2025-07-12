@@ -49,3 +49,6 @@ button:hover {
 .pastel-bg {
   background-color: var(--color-bg);
 }
+body {
+  font-family: 'Quicksand', ui-sans-serif, system-ui;
+}
