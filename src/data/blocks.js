@@ -34,7 +34,7 @@ export const SECTIONS = `{
             name,
             title,
             image ${IMAGE},
-            company-> {
+            RIBI KIDS-> {
                 _type,
                 _id,
                 name,
