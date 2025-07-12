@@ -30,7 +30,8 @@ const canonicalURL = new URL(Astro.request.url, Astro.site);
     {description && <meta name="description" content={description} />}
     {resolvedImage && <meta property="og:image" content={resolvedImage.src} />}
     <link rel="stylesheet" href="/styles/globals.css" />
-  </head>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
   <body class="pastel-bg text-base text-gray-700 font-quicksand">
     <Header />
     <main class="px-4 py-6 max-w-6xl mx-auto">
